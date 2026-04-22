@@ -970,23 +970,10 @@ ESPPad.Parent = ESPScrollFrame
 
 local MainESPContent = ESPScrollFrame
 
-local AntiFlingToggle, GetAntiFling = CreateModernToggle(LocalScriptContent, "Anti Fling")
+local AntiFlingBtn = CreateShimmerButton(LocalScriptContent, "Anti Fling")
 
-task.spawn(function()
-    while task.wait(0.1) do
-        if GetAntiFling() then
-            local char = LocalPlayer.Character
-            if char then
-                for _, v in ipairs(workspace:GetDescendants()) do
-                    if v:IsA("BasePart") and not v.Anchored and not v:IsDescendantOf(char) then
-                        if v.AssemblyLinearVelocity.Magnitude > 30 or v.AssemblyAngularVelocity.Magnitude > 30 then
-                            v.CanCollide = false
-                        end
-                    end
-                end
-            end
-        end
-    end
+AntiFlingBtn.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/sytcal/antifling/main/9999"))()
 end)
 
 local WalkConnection
